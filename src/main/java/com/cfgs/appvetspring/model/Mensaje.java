@@ -58,4 +58,13 @@ public class Mensaje {
 //    public void setUser(User user) {
 //        this.user = user;
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Mensaje{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

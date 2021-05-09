@@ -126,4 +126,16 @@ public class User implements Serializable {
 //    public void setMensajes(List<Mensaje> mensajes) {
 //        this.mensajes = mensajes;
 //    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", email='" + email + '\'' +
+                ", createAt=" + createAt +
+                ", foto='" + foto + '\'' +
+                '}';
+    }
 }

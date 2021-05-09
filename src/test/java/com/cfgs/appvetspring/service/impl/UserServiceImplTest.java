@@ -10,17 +10,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class UserServiceImplTest {
     @Mock
-    User user;
+    User user = new User();
     @Mock
     UserRepository userRepository;
     @Test
     void create() {
-        User user = new User();
+
         user.setNombre("Pablo");
         user.setApellido("Robles Tris");
         user.setEmail("pbr@gmail.com");
         userRepository.save(user);
+        System.out.println(">>>>>>>>user"+user.getId());
         assertNotNull(user.getId());
+
     }
 
     @Test

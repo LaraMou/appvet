@@ -75,18 +75,16 @@ public class Task {
      * @param finish Boolean
      * @param estado String
      * @param motivo String
-     * @param createdDate Instant
      * @param lastModifiedBy String
      * @param deliver_date LocalDate
      */
 
-    public Task(String title, String description, Boolean finish, String estado, String motivo, Instant createdDate, String lastModifiedBy, LocalDate deliver_date) {
+    public Task(String title, String description, Boolean finish, String estado, String motivo, String lastModifiedBy, LocalDate deliver_date) {
         this.title = title;
         this.description = description;
         this.finish = finish;
         this.estado = estado;
         this.motivo = motivo;
-        this.createdDate = createdDate;
         this.lastModifiedBy = lastModifiedBy;
         this.deliver_date = deliver_date;
     }

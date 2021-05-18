@@ -3,8 +3,8 @@
 
 ## GESTOR DE TAREAS CLINICA UNO MÁS
 
+## AppVET CREADA.
 
-## TESTING IMAGENE CREACION USUARIO
-![image](https://user-images.githubusercontent.com/73643721/117567315-11913000-b0bc-11eb-9e4d-28adaba0072f.png)
+
 
 

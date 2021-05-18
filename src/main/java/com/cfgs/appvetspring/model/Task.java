@@ -53,9 +53,9 @@ public class Task {
 
 
     @OneToMany(mappedBy="task",orphanRemoval = true,cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("tasks")
+    @JsonIgnoreProperties("task")
     private List<Mensaje> mensajes =new ArrayList<>();
-    @ManyToMany(mappedBy = "tasks", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "tasks",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("tasks")
     private List<User> users = new ArrayList<>();
 

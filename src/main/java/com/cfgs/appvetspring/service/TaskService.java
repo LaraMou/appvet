@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface TaskService {
 
-    public List<Task> findAll();
+    public Iterable<Task> findAll();
 
     public List<Task> findAllByEstado(String estado);
 
@@ -17,4 +17,6 @@ public interface TaskService {
     public Task saveEtiqueta(Task task);
 
     public void deleteById(Long id);
+
+    public List<Task> findTaskByUser(Long id);
 }

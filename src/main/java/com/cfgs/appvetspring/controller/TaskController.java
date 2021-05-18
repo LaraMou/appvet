@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
 public class TaskController {
@@ -73,7 +73,7 @@ public class TaskController {
     @ApiOperation("Encontrar todas las tareas sin paginación")
     public List<Task> findAllTasks(){
         log.debug("Rest request all Task");
-        return taskService.findAll();
+        return (List<Task>) taskService.findAll();
     }
 
     /**
@@ -97,7 +97,7 @@ public class TaskController {
      * @param estado String estado
      * @return
      */
-    @GetMapping("/tasks/finalizada/{estado}")
+    @GetMapping("/tasks/estado/{estado}")
     @ApiOperation("Encontrar  tareas por estado")
     public ResponseEntity<List<Task>> findAllTaskByFinish(@ApiParam("Busqueda por estado Booleano")@PathVariable String estado) {
         log.debug("Rest request a Task with finish: "+estado);
@@ -110,14 +110,34 @@ public class TaskController {
     }
 
     /**
+     * Método para recuperar tareas asociadas a un usuario
+     * @param id Long
+     * @return devuelve una lista
+     */
+
+    @GetMapping("/tasks/user/{id}")
+    @ApiOperation("Encontrar  tareas por estado")
+    public ResponseEntity<List<Task>> findTaskByUser(@PathVariable Long id){
+        log.debug("Rest request All cuentas with user id: "+ id );
+        List<Task> taskList = taskService.findTaskByUser(id);
+        if(taskList!= null){
+            return ResponseEntity.ok().body(taskList);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+
+    /**
      * Request para el borrado de tareas por id
      * @param id Long
      * @return httpStatus.ok
      */
-    @DeleteMapping("/task/{id}")
+    @DeleteMapping("/tasks/{id}")
     @ApiOperation("Borrado de tarea")
     public ResponseEntity<?> delete(@ApiParam("Identficador id")@PathVariable Long id) {
-
+        System.out.println("entreada ........");
         Map<String, Object> response = new HashMap<>();
 
         try {
@@ -125,12 +145,12 @@ public class TaskController {
             if (taskOpt.isPresent())
                 taskService.deleteById(id);
         } catch (DataAccessException e) {
-            response.put("mensaje", "Error al eliminar el user de la base de datos");
+            response.put("mensaje", "Error al eliminar la tarea de la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        response.put("mensaje", "El user eliminado con éxito!");
+        response.put("mensaje", "Tarea eliminada con éxito!");
 
         return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
     }

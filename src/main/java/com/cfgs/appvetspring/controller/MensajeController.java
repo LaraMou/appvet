@@ -135,7 +135,7 @@ public class MensajeController {
     @DeleteMapping("/mensaje/{id}")
     @ApiOperation("Borrado de mensaje")
     public ResponseEntity<?> delete(@ApiParam("Identficador id")@PathVariable Long id) {
-
+        System.out.println("-----LLego aki");
         Map<String, Object> response = new HashMap<>();
 
         try {

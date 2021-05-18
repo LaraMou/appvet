@@ -32,6 +32,7 @@ public class User implements Serializable {
     @Column(nullable = false, unique = true)
     private String email;
 
+    private String disponibilidad;
     @NotNull(message = "no puede estar vacio")
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
@@ -39,7 +40,7 @@ public class User implements Serializable {
 
     private String foto;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL,CascadeType.REFRESH})
     @JoinTable(
             name = "user_task",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -66,6 +67,11 @@ public class User implements Serializable {
     public Long getId() {
         return id;
     }
+    @PrePersist
+    public void prePersist() {
+        this.createAt = new Date();
+    }
+
 
     public void setId(Long id) {
         this.id = id;
@@ -89,6 +95,14 @@ public class User implements Serializable {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getDisponibilidad() {
+        return disponibilidad;
+    }
+
+    public void setDisponibilidad(String disponibilidad) {
+        this.disponibilidad = disponibilidad;
     }
 
     public void setEmail(String email) {

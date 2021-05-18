@@ -13,7 +13,7 @@ public class Mensaje {
     @Column(name="id")
     private Long id;
     private String description;
-//    @ManyToOne
+//    @ManyToOne TODO
 //    @JoinColumn(name="user_id")
 //    @JsonIdentityReference(alwaysAsId = true)
 //    private User user;
@@ -25,7 +25,10 @@ public class Mensaje {
     public Mensaje() {
     }
 
+    public Mensaje(String description) {
+        this.description = description;
 
+    }
 
     public Long getId() {
         return id;

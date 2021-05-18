@@ -19,7 +19,7 @@ public class TaskServiceImpl implements TaskService {
     private TaskDao taskDao;
     @Override
     public List<Task> findAll() {
-        return taskRepository.findAll();
+        return (List<Task>) taskRepository.findAll();
     }
 
     @Override
@@ -39,6 +39,11 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public void deleteById(Long id) {
+        taskRepository.deleteById(id);
+    }
 
+    @Override
+    public List<Task> findTaskByUser(Long id) {
+        return taskDao.findTaskByUser(id);
     }
 }

@@ -3,6 +3,7 @@ package com.cfgs.appvetspring.dao.impl;
 
 import com.cfgs.appvetspring.dao.TaskDao;
 import com.cfgs.appvetspring.model.Task;
+import com.cfgs.appvetspring.model.User;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,6 +65,18 @@ public class TaskDaoImpl implements TaskDao {
         List<Task> items = manager.createQuery(criteriaQuery).getResultList();
         manager.close();
         return items;
+    }
+
+    @Override
+    public List<Task> findTaskByUser(Long id) {
+        User usuarioDb = manager.find(User.class,id);
+
+        if(usuarioDb != null){
+            return usuarioDb.getTasks();
+        }
+        else{
+            return new ArrayList<>();
+        }
     }
 
     @Override

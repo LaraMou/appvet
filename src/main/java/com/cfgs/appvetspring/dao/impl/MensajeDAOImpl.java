@@ -38,7 +38,7 @@ public class MensajeDAOImpl  implements MensajeDAO {
             CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
             CriteriaQuery<Mensaje> criteriaQuery = criteriaBuilder.createQuery(Mensaje.class);
             Root<Mensaje> itemRoot = criteriaQuery.from(Mensaje.class);
-            Predicate predicate = criteriaBuilder.equal(itemRoot.get("task_id"), id);
+            Predicate predicate = criteriaBuilder.equal(itemRoot.get("task"), id);
             criteriaQuery.where(predicate);
             List<Mensaje> items = manager.createQuery(criteriaQuery).getResultList();
             return items;

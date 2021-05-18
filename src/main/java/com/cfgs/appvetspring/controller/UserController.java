@@ -132,7 +132,7 @@ public class UserController {
 
             userActual.setApellido(user.getApellido());
             userActual.setNombre(user.getNombre());
-            userActual.setEmail(user.getEmail());
+//            userActual.setEmail(user.getEmail());
 
 
             userUpdated = userService.saveUser(userActual);
@@ -163,6 +163,7 @@ public class UserController {
             //uploadService.eliminar(nombreFotoAnterior);
 
             userService.deleteById(id);
+
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al eliminar el user de la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));

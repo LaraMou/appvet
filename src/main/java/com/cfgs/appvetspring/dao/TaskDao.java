@@ -13,7 +13,7 @@ public interface TaskDao {
 
     List<Task> findAllTasks();
 
-
+    List<Task> findTaskByUser(Long id);
     Optional<Task> findTaskByID(Long id);
 
 }

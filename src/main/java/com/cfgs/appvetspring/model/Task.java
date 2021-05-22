@@ -29,7 +29,7 @@ public class Task {
     @Column(name = "finish")
     private Boolean finish;
 
-    private String estado;
+    private Estado estado;
 
     private String motivo;
     @CreatedDate
@@ -68,23 +68,13 @@ public class Task {
     public Task() {
     }
 
-    /**
-     * Constructor sobre cargado con los parametros
-     * @param title String
-     * @param description String
-     * @param finish Boolean
-     * @param estado String
-     * @param motivo String
-     * @param lastModifiedBy String
-     * @param deliver_date LocalDate
-     */
-
-    public Task(String title, String description, Boolean finish, String estado, String motivo, String lastModifiedBy, LocalDate deliver_date) {
+    public Task(String title, String description, Boolean finish, Estado estado, String motivo, Instant createdDate, String lastModifiedBy, LocalDate deliver_date) {
         this.title = title;
         this.description = description;
         this.finish = finish;
         this.estado = estado;
         this.motivo = motivo;
+        this.createdDate = createdDate;
         this.lastModifiedBy = lastModifiedBy;
         this.deliver_date = deliver_date;
     }
@@ -121,11 +111,11 @@ public class Task {
         this.finish = finish;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 

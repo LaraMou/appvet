@@ -23,8 +23,13 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> findAllByEstado(String estado) {
-        return taskDao.findByEstado(estado);
+    public List<Task> findAllTasksByEstado(String estado) {
+        return taskDao.findAllTasksByEstado(estado);
+    }
+
+    @Override
+    public List<Task> findAllTasksByFinish(Boolean finish) {
+        return taskDao.findAllTaskByFinish(finish);
     }
 
     @Override

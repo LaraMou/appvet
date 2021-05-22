@@ -36,12 +36,12 @@ public class UserController {
     public List<User> index() {
         return userService.findAll();
     }
-//    @GetMapping("/users/page/{page}")
-//    @ApiOperation("Encuentra todos los empleados con paginación")
-//    public Page<User> index(@PathVariable Integer page) {
-//        Pageable pageable = PageRequest.of(page, 4);
-//        return userService.findAll(pageable);
-//    }
+    @GetMapping("/users/page/{page}")
+    @ApiOperation("Encuentra todos los empleados con paginación")
+    public Page<User> index(@PathVariable Integer page) {
+        Pageable pageable = PageRequest.of(page, 4);
+        return userService.findAll(pageable);
+    }
 
 
     @GetMapping("/users/{id}")

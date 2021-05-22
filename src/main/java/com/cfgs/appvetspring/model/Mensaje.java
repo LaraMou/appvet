@@ -1,6 +1,7 @@
 package com.cfgs.appvetspring.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -13,10 +14,11 @@ public class Mensaje {
     @Column(name="id")
     private Long id;
     private String description;
-//    @ManyToOne TODO
-//    @JoinColumn(name="user_id")
-//    @JsonIdentityReference(alwaysAsId = true)
-//    private User user;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @JsonIgnore
+    @JsonIdentityReference(alwaysAsId = true)
+    private User user;
     @ManyToOne
     @JoinColumn(name="task_id")
     @JsonIdentityReference(alwaysAsId = true)
@@ -53,14 +55,14 @@ public class Mensaje {
     public void setTask(Task task) {
         this.task = task;
     }
-//
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 
     @Override

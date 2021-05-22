@@ -2,6 +2,7 @@ package com.cfgs.appvetspring.dao.impl;
 
 
 import com.cfgs.appvetspring.dao.TaskDao;
+import com.cfgs.appvetspring.model.Estado;
 import com.cfgs.appvetspring.model.Task;
 import com.cfgs.appvetspring.model.User;
 import org.springframework.stereotype.Repository;
@@ -41,18 +42,17 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public List<Task> findByEstado(String estado) {
-        if(estado!=null) {
-            CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-            CriteriaQuery<Task> criteriaQuery = criteriaBuilder.createQuery(Task.class);
-            Root<Task> itemRoot = criteriaQuery.from(Task.class);
-            Predicate predicateEstado = criteriaBuilder.equal(itemRoot.get("estado"), estado);
-            criteriaQuery.where(predicateEstado);
-            List<Task> items = manager.createQuery(criteriaQuery).getResultList();
-            return items;
-        }
-        return null;
+    public List<Task> findAllTasksByEstado(String estado) {
+
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<Task> criteria = builder.createQuery(Task.class);
+        Root<Task> root = criteria.from(Task.class);
+        criteria.select(root);
+
+        criteria.where(builder.equal(root.get("estado"), Estado.valueOf(estado)));
+        return  manager.createQuery(criteria).getResultList();
     }
+
 
 
     @Override

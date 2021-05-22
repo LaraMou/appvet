@@ -99,9 +99,25 @@ public class TaskController {
      */
     @GetMapping("/tasks/estado/{estado}")
     @ApiOperation("Encontrar  tareas por estado")
-    public ResponseEntity<List<Task>> findAllTaskByFinish(@ApiParam("Busqueda por estado Booleano")@PathVariable String estado) {
-        log.debug("Rest request a Task with finish: "+estado);
-        List<Task> tasks=taskService.findAllByEstado(estado);
+    public ResponseEntity<List<Task>> findAllByEstado(@ApiParam("Busqueda por estado Estado")@PathVariable String estado) {
+        log.debug("Rest request a Task with estado: "+estado);
+        List<Task> tasks=taskService.findAllTasksByEstado(estado);
+        if (!tasks.isEmpty())
+            return ResponseEntity.ok().body(tasks);
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+    /**
+     * Metodo que devuelve una lista de tareas filtrando por finalizar
+     * @param finish Booleano
+     * @return Lista de tareas completadas
+     */
+    @GetMapping("/tasks/completa/{finish}")
+    @ApiOperation("Encontrar  tareas completadas")
+    public ResponseEntity<List<Task>> findAllTaskByFinish(@ApiParam("Busqueda por finalizado Booleano")@PathVariable Boolean finish) {
+        log.debug("Rest request a Task with finish: "+finish);
+        List<Task> tasks=taskService.findAllTasksByFinish(finish);
         if (!tasks.isEmpty())
             return ResponseEntity.ok().body(tasks);
 
@@ -137,7 +153,7 @@ public class TaskController {
     @DeleteMapping("/tasks/{id}")
     @ApiOperation("Borrado de tarea")
     public ResponseEntity<?> delete(@ApiParam("Identficador id")@PathVariable Long id) {
-        System.out.println("entreada ........");
+
         Map<String, Object> response = new HashMap<>();
 
         try {

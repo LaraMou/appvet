@@ -23,7 +23,7 @@ public class MensajeDAOImpl  implements MensajeDAO {
                 CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
                 CriteriaQuery<Mensaje> criteriaQuery = criteriaBuilder.createQuery(Mensaje.class);
                 Root<Mensaje> itemRoot = criteriaQuery.from(Mensaje.class);
-                Predicate predicate = criteriaBuilder.equal(itemRoot.get("user_id"), id);
+                Predicate predicate = criteriaBuilder.equal(itemRoot.get("user"), id);
                 criteriaQuery.where(predicate);
                 List<Mensaje> items = manager.createQuery(criteriaQuery).getResultList();
                 return items;
@@ -34,6 +34,7 @@ public class MensajeDAOImpl  implements MensajeDAO {
 
     @Override
     public List<Mensaje> findByTaskId(Long id) {
+
         if(id!=null) {
             CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
             CriteriaQuery<Mensaje> criteriaQuery = criteriaBuilder.createQuery(Mensaje.class);

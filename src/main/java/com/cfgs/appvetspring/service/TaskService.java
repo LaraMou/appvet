@@ -9,9 +9,9 @@ public interface TaskService {
 
     public Iterable<Task> findAll();
 
-    public List<Task> findAllByEstado(String estado);
+    public List<Task> findAllTasksByEstado(String estado);
 
-
+    public List<Task> findAllTasksByFinish(Boolean finish);
     public Optional<Task> findById(Long id);
 
     public Task saveEtiqueta(Task task);

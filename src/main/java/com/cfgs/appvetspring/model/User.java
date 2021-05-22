@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,9 +49,9 @@ public class User implements Serializable {
     )
     @JsonIgnoreProperties("users")
     private List<Task> tasks = new ArrayList<>();
-//    @JsonIgnoreProperties("user")
-//    @OneToMany(mappedBy="user",orphanRemoval = true,cascade = CascadeType.ALL)
-//    private List<Mensaje> mensajes =new ArrayList<>();
+    @JsonIgnoreProperties("user")
+    @OneToMany(mappedBy="user",orphanRemoval = true,cascade = CascadeType.ALL)
+    private List<Mensaje> mensajes =new ArrayList<>();
 
 //    @OneToMany(fetch = FetchType.LAZY,mappedBy="user",orphanRemoval = true,cascade = CascadeType.ALL)
 //    private List<Task> tasks =new ArrayList<>();

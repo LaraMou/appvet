@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface TaskDao {
     List<Task> findAllTaskByFinish(Boolean finish);
-    List<Task> findByEstado(String estado);
+    List<Task> findAllTasksByEstado(String estado);
 
     List<Task> findAllTasks();
 

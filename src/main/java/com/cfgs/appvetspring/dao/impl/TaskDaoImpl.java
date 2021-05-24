@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -80,17 +81,11 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public Optional<Task> findTaskByID(Long id) {
-        if(id!=null) {
-            CriteriaBuilder builder = manager.getCriteriaBuilder();
-            CriteriaQuery<Task> criteria = builder.createQuery(Task.class);
-            Root<Task> root = criteria.from(Task.class);
-            criteria.select(root);
-            criteria.where(builder.equal(root.get("id"), id));
-            Task item = manager.createQuery(criteria).getSingleResult();
-            manager.close();
-            return Optional.of(item);
-        }
-        return Optional.empty();
+    @Transactional
+    public void deleteTaskByUser(Long id) {
+        manager.createNativeQuery("delete from user_task where task_id= ?")
+                .setParameter(1,id)
+                .executeUpdate();
     }
+
 }

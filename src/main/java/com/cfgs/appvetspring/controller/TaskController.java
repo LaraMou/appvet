@@ -3,12 +3,16 @@ package com.cfgs.appvetspring.controller;
 
 import com.cfgs.appvetspring.model.Task;
 import com.cfgs.appvetspring.model.Task;
+import com.cfgs.appvetspring.model.User;
 import com.cfgs.appvetspring.service.TaskService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -75,6 +79,12 @@ public class TaskController {
         log.debug("Rest request all Task");
         return (List<Task>) taskService.findAll();
     }
+    @GetMapping("/tasks/page/{page}")
+    @ApiOperation("Encuentra todos las tareas con paginación")
+    public Page<Task> index(@PathVariable Integer page) {
+        Pageable pageable = PageRequest.of(page, 4);
+        return taskService.findAll(pageable);
+    }
 
     /**
      * metodo que filtra una tarea filtrando por su ID
@@ -132,7 +142,7 @@ public class TaskController {
      */
 
     @GetMapping("/tasks/user/{id}")
-    @ApiOperation("Encontrar  tareas por estado")
+    @ApiOperation("Encontrar  tareas por usuario")
     public ResponseEntity<List<Task>> findTaskByUser(@PathVariable Long id){
         log.debug("Rest request All cuentas with user id: "+ id );
         List<Task> taskList = taskService.findTaskByUser(id);
@@ -160,6 +170,31 @@ public class TaskController {
             Optional<Task> taskOpt = taskService.findById(id);
             if (taskOpt.isPresent())
                 taskService.deleteById(id);
+        } catch (DataAccessException e) {
+            response.put("mensaje", "Error al eliminar la tarea de la base de datos");
+            response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        response.put("mensaje", "Tarea eliminada con éxito!");
+
+        return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
+    }
+    /**
+     * Request para el borrado de tareas por id
+     * @param id Long
+     * @return httpStatus.ok
+     */
+    @DeleteMapping("/tasks/user/{id}")
+    @ApiOperation("Borrado de tarea")
+    public ResponseEntity<?> deleteTaskUser(@ApiParam("Identficador id")@PathVariable Long id) {
+
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            Optional<Task> taskOpt = taskService.findById(id);
+            if (taskOpt.isPresent())
+                taskService.deleteTaskById(id);
         } catch (DataAccessException e) {
             response.put("mensaje", "Error al eliminar la tarea de la base de datos");
             response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));

@@ -2,9 +2,12 @@ package com.cfgs.appvetspring.service.impl;
 
 import com.cfgs.appvetspring.dao.TaskDao;
 import com.cfgs.appvetspring.model.Task;
+import com.cfgs.appvetspring.model.User;
 import com.cfgs.appvetspring.repository.TaskRepository;
 import com.cfgs.appvetspring.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +28,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> findAllTasksByEstado(String estado) {
         return taskDao.findAllTasksByEstado(estado);
+    }
+    @Override
+    public Page<Task> findAll(Pageable pageable) {
+        return taskRepository.findAll(pageable);
     }
 
     @Override
@@ -50,5 +57,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public List<Task> findTaskByUser(Long id) {
         return taskDao.findTaskByUser(id);
+    }
+
+    @Override
+    public void deleteTaskById(Long id) {
+        taskDao.deleteTaskByUser(id);
     }
 }

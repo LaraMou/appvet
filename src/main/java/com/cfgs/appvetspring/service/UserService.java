@@ -15,4 +15,9 @@ public interface UserService {
     public User saveUser(User user);
 
     public void deleteById(Long id);
+
+    public void insertUserTask(Long idUser, Long idTask);
+
+
+
 }

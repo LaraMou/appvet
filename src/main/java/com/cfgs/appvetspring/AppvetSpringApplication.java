@@ -41,19 +41,19 @@ public class AppvetSpringApplication implements CommandLineRunner {
 //        userService.saveUser(user2);
 //        userService.saveUser(user3);
 // TODO: 21/05/2021
-        List<User> users = new ArrayList<>();
-        users.add(new User("Pablo","Prieto","unomas@gmail.com"));
-        users.add(new User("Ana","Torroja","Anaunomas@gmail.com"));
-
-        List<Task> tasks= new ArrayList<>();
-        tasks.add(new Task("Radiografía","Necesidad de Rayos transversal",false, Estado.PENDIENTE,"radiografia",Instant.now(),"Pablo", LocalDate.now()));
-        tasks.add(new Task("Ecografia","Necesidad de Rayos transversal",false, Estado.CURSO,"masa negra",Instant.now(),"Ana", LocalDate.now()));
-        tasks.add(new Task("Radiografía","Necesidad de Rayos transversal",true, Estado.FINALIZADO,"radiografia",Instant.now(),"Pablo", LocalDate.now()));
-
-        tasks.get(1).setUsers(users);
-        users.get(1).setTasks(tasks);
-        userService.saveUser(users.get(1));
-        taskService.saveEtiqueta(tasks.get(1));
+//        List<User> users = new ArrayList<>();
+//        users.add(new User("Pablo","Prieto","unomas@gmail.com"));
+//        users.add(new User("Ana","Torroja","Anaunomas@gmail.com"));
+//
+//        List<Task> tasks= new ArrayList<>();
+//        tasks.add(new Task("Radiografía","Necesidad de Rayos transversal",false, Estado.PENDIENTE,"radiografia",Instant.now(),"Pablo", LocalDate.now()));
+//        tasks.add(new Task("Ecografia","Necesidad de Rayos transversal",false, Estado.CURSO,"masa negra",Instant.now(),"Ana", LocalDate.now()));
+//        tasks.add(new Task("Radiografía","Necesidad de Rayos transversal",true, Estado.FINALIZADO,"radiografia",Instant.now(),"Pablo", LocalDate.now()));
+//
+//        tasks.get(1).setUsers(users);
+//        users.get(1).setTasks(tasks);
+//        userService.saveUser(users.get(1));
+//        taskService.saveEtiqueta(tasks.get(1));
 ////
 //
 //        Task task1 = new Task("Consulta","Flipy en consulta",false,"pendiente","analítica","Tano",LocalDate.now());

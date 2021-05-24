@@ -41,7 +41,7 @@ public class User implements Serializable {
 
     private String foto;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL,CascadeType.REFRESH})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinTable(
             name = "user_task",
             joinColumns = {@JoinColumn(name = "user_id")},

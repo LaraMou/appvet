@@ -31,7 +31,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = { "http://localhost:4200" })
+//@CrossOrigin(origins = { "http://localhost:4200" })
+@CrossOrigin(origins = { "https://appvetfront-b3j0hxlv4-laramou.vercel.app" },methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
 @RestController
 @RequestMapping("/api")
 public class UserController {
